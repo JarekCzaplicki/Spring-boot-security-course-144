@@ -35,7 +35,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests() // deklarujemy że zadania muszą byc autoryzowane
                 .antMatchers("/", "index") // część naszej białej listy
                 .permitAll()// kolejna część białej listy
-                .antMatchers("/api/**").hasRole(STUDENT.name())
+//                .antMatchers("/api/**").hasRole(STUDENT.name())
 //                .antMatchers("management/api/**").hasAnyRole(ADMIN.name(), ADMINTRAINEE.name())
 //                .antMatchers(HttpMethod.GET, "management/api/**").hasAnyAuthority(ApplicationUserPermission.COURSE_READ.getPermission())
 //                .antMatchers(HttpMethod.PUT, "management/api/**").hasAnyAuthority(ApplicationUserPermission.COURSE_WRITE.getPermission())
@@ -68,7 +68,13 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .roles(STUDENT.name())
                 .authorities(ADMINTRAINEE.getGrantedAuthorities())
                 .build();
-        return new InMemoryUserDetailsManager(jarekUser, marekUser, danielUser);
+        UserDetails kasiaUser = User.builder()
+                .username("kasia")
+                .password(passwordEncoder.encode("123456"))
+//                .roles(STUDENT.name())
+                .authorities(GUEST.getGrantedAuthorities())
+                .build();
+        return new InMemoryUserDetailsManager(jarekUser, marekUser, danielUser, kasiaUser);
     }
 
 }
