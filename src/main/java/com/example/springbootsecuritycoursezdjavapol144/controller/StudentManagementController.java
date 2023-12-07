@@ -43,4 +43,9 @@ public class StudentManagementController {
         System.out.println("updateStudent");
         System.out.printf("id: %s, student: %s%n", studentId, student);
     }
+
+    // dodatkowy endpoint który wyświetli na konsoli komunikat "witaj drogi " + name
+    // "localhost:8080/management/api/v1/students/guest/jarek
+    // ma być dostępny tylko dla użytkownika posiadającego 'guest:read'
+
 }
