@@ -14,11 +14,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 import static com.example.springbootsecuritycoursezdjavapol144.security.ApplicationUserRole.*;
 
 @Configuration
-@EnableWebSecurity // adnotacja, która określa, że klasa będzie będzie zawierała konfiguracje dla "Security"
+//@EnableWebSecurity // adnotacja, która określa, że klasa będzie będzie zawierała konfiguracje dla "Security"
 @EnableGlobalMethodSecurity(prePostEnabled = true) // dzięki temu działają adnotacje nad endpointami
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -31,7 +32,8 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()// spring domyślnie zabezpiecza api przed dostępem, teraz musimy wyłączyć
+                .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                .and()// dokumentacja https://docs.spring.io/spring-security/reference/features/exploits/csrf.html
                 .authorizeRequests() // deklarujemy że zadania muszą byc autoryzowane
                 .antMatchers("/", "index") // część naszej białej listy
                 .permitAll()// kolejna część białej listy
