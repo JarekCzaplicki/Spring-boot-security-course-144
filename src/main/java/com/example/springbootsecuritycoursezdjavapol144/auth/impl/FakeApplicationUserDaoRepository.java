@@ -1,5 +1,7 @@
-package com.example.springbootsecuritycoursezdjavapol144.auth;
+package com.example.springbootsecuritycoursezdjavapol144.auth.impl;
 
+import com.example.springbootsecuritycoursezdjavapol144.auth.ApplicationUser;
+import com.example.springbootsecuritycoursezdjavapol144.auth.ApplicationUserDao;
 import com.google.common.collect.Lists;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
@@ -9,7 +11,7 @@ import java.util.Optional;
 
 import static com.example.springbootsecuritycoursezdjavapol144.security.ApplicationUserRole.*;
 
-@Repository
+@Repository("fake")
 public class FakeApplicationUserDaoRepository implements ApplicationUserDao {
     private final PasswordEncoder passwordEncoder;
 
