@@ -70,36 +70,6 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setPasswordEncoder(passwordEncoder);
         provider.setUserDetailsService(applicationUserService);
+        return provider;
     }
-
-//    @Override
-//    @Bean // zwraca beana i będzie zarządzana przez kontekst springa
-//    protected UserDetailsService userDetailsService() {
-//        UserDetails jarekUser = User.builder()
-//                .username("jarek")
-//                .password(passwordEncoder.encode("123456"))
-////                .roles(ADMIN.name())
-//                .authorities(ADMIN.getGrantedAuthorities())
-//                .build();
-//        UserDetails marekUser = User.builder()
-//                .username("marek")
-//                .password(passwordEncoder.encode("123456"))
-////                .roles(STUDENT.name())
-//                .authorities(STUDENT.getGrantedAuthorities())// ROLE_STUDENT
-//                .build();
-//        UserDetails danielUser = User.builder()
-//                .username("daniel")
-//                .password(passwordEncoder.encode("123456"))
-////                .roles(STUDENT.name())
-//                .authorities(ADMINTRAINEE.getGrantedAuthorities())
-//                .build();
-//        UserDetails kasiaUser = User.builder()
-//                .username("kasia")
-//                .password(passwordEncoder.encode("123456"))
-////                .roles(STUDENT.name())
-//                .authorities(GUEST.getGrantedAuthorities())
-//                .build();
-//        return new InMemoryUserDetailsManager(jarekUser, marekUser, danielUser, kasiaUser);
-//    }
-
 }
