@@ -8,12 +8,11 @@ import java.util.stream.Collectors;
 
 import static com.example.springbootsecuritycoursezdjavapol144.security.ApplicationUserPermission.*;
 
+
 public enum ApplicationUserRole {
     STUDENT(Sets.newHashSet()),
-    ADMIN(Sets.newHashSet(STUDENT_READ, STUDENT_WRITE, COURSE_READ, COURSE_WRITE)),
-    ADMINTRAINEE(Sets.newHashSet(STUDENT_READ, COURSE_READ)),
-    GUEST(Sets.newHashSet(GUEST_READ));
-
+    ADMIN(Sets.newHashSet(COURSE_READ, COURSE_WRITE, STUDENT_READ, STUDENT_WRITE, USERS_WRITE)),
+    ADMINTRAINEE(Sets.newHashSet(COURSE_READ, STUDENT_READ));
 
     private final Set<ApplicationUserPermission> permissions;
 

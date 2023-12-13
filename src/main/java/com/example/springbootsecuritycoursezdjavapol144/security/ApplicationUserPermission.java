@@ -5,13 +5,15 @@ public enum ApplicationUserPermission {
     STUDENT_WRITE("student:write"),
     COURSE_READ("course:read"),
     COURSE_WRITE("course:write"),
-    GUEST_READ("guest:read");
+    USERS_WRITE("users:write");
+
     private final String permission;
 
     ApplicationUserPermission(String permission) {
         this.permission = permission;
     }
-    public String getPermission(){
+
+    public String getPermission() {
         return permission;
     }
 }
