@@ -10,7 +10,7 @@ import java.util.Set;
 
 public class ApplicationUser implements UserDetails {
     private final String username;
-    private final String password;
+    private String password;
     @JsonDeserialize(contentUsing = SimpleGrantedAuthorityDeserializer.class)
     private final Set<? extends GrantedAuthority> grantedAuthorities;
     private final boolean isAccountNonExpired;
@@ -18,10 +18,16 @@ public class ApplicationUser implements UserDetails {
     private final boolean isCredentialsNonExpired;
     private final boolean isEnabled;
 
-    public ApplicationUser(String username, String password,Set<? extends GrantedAuthority> grantedAuthorities, boolean isAccountNonExpired, boolean isAccountNonLocked, boolean isCredentialsNonExpired, boolean isEnabled) {
-        this.grantedAuthorities = grantedAuthorities;
-        this.password = password;
+    public ApplicationUser(String username,
+                           String password,
+                           Set<? extends GrantedAuthority> grantedAuthorities,
+                           boolean isAccountNonExpired,
+                           boolean isAccountNonLocked,
+                           boolean isCredentialsNonExpired,
+                           boolean isEnabled) {
         this.username = username;
+        this.password = password;
+        this.grantedAuthorities = grantedAuthorities;
         this.isAccountNonExpired = isAccountNonExpired;
         this.isAccountNonLocked = isAccountNonLocked;
         this.isCredentialsNonExpired = isCredentialsNonExpired;
@@ -63,16 +69,7 @@ public class ApplicationUser implements UserDetails {
         return isEnabled;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ApplicationUser that = (ApplicationUser) o;
-        return isAccountNonExpired == that.isAccountNonExpired && isAccountNonLocked == that.isAccountNonLocked && isCredentialsNonExpired == that.isCredentialsNonExpired && isEnabled == that.isEnabled && Objects.equals(username, that.username) && Objects.equals(password, that.password) && Objects.equals(grantedAuthorities, that.grantedAuthorities);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(username, password, grantedAuthorities, isAccountNonExpired, isAccountNonLocked, isCredentialsNonExpired, isEnabled);
+    public void setPassword(String encodedPassword) {
+        this.password = encodedPassword;
     }
 }

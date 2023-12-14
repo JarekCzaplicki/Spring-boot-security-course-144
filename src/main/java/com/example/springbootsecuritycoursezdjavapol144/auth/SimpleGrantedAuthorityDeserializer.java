@@ -12,10 +12,11 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import java.io.IOException;
 
 public class SimpleGrantedAuthorityDeserializer extends JsonDeserializer<SimpleGrantedAuthority> {
+
     @Override
-    public SimpleGrantedAuthority deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
-        ObjectNode node = jsonParser.getCodec().readTree(jsonParser);
-        String authority = node.get("authority").asText();
+    public SimpleGrantedAuthority deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
+        ObjectNode node = jp.getCodec().readTree(jp);
+        String authority = node.get("authority").asText(); // Zakładając, że pola 'authority' zawiera nazwę uprawnienia
         return new SimpleGrantedAuthority(authority);
     }
 }

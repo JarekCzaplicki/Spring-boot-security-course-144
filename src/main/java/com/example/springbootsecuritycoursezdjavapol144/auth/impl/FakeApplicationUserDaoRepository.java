@@ -21,7 +21,8 @@ public class FakeApplicationUserDaoRepository implements ApplicationUserDao {
 
     @Override
     public Optional<ApplicationUser> selectApplicationUserByUsername(String username) {
-        return getApplicationUsers().stream()
+        return getApplicationUsers()
+                .stream()
                 .filter(applicationUser -> username.equals(applicationUser.getUsername()))
                 .findFirst();
     }

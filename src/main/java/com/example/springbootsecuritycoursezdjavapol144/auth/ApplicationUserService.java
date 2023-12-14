@@ -1,18 +1,21 @@
 package com.example.springbootsecuritycoursezdjavapol144.auth;
 
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ApplicationUserService implements UserDetailsService {
 
     private final ApplicationUserDao applicationUserDao;
 
-    public ApplicationUserService(@Qualifier("mysql") ApplicationUserDao applicationUserDao) {
+    @Autowired
+    public ApplicationUserService(@Qualifier("fake") ApplicationUserDao applicationUserDao) {
         this.applicationUserDao = applicationUserDao;
     }
 
@@ -21,6 +24,7 @@ public class ApplicationUserService implements UserDetailsService {
         return applicationUserDao
                 .selectApplicationUserByUsername(username)
                 .orElseThrow(() ->
-                        new UsernameNotFoundException(String.format("Username %s not found", username)));
+                        new UsernameNotFoundException(String.format("Username %s not found", username))
+                );
     }
 }

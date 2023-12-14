@@ -18,6 +18,7 @@ import static com.example.springbootsecuritycoursezdjavapol144.security.Applicat
 
 @Repository("mysql")
 public class MySqlApplicationUserDao implements ApplicationUserDao {
+
     private final PasswordEncoder passwordEncoder;
     private final ApplicationUserRepository applicationUserRepository;
 
@@ -28,7 +29,8 @@ public class MySqlApplicationUserDao implements ApplicationUserDao {
 
     @Override
     public Optional<ApplicationUser> selectApplicationUserByUsername(String username) {
-        return getApplicationUsers().stream()
+        return getApplicationUsers()
+                .stream()
                 .filter(applicationUser -> username.equals(applicationUser.getUsername()))
                 .findFirst();
     }
@@ -44,10 +46,8 @@ public class MySqlApplicationUserDao implements ApplicationUserDao {
         return new ApplicationUser(
                 entity.getUsername(),
                 entity.getPassword(),
-                entity.getAuthorities()
-                        .stream()
-                        .flatMap(authority -> ApplicationUserRole.valueOf(
-                                authority.getAuthority()).getGrantedAuthorities().stream())
+                entity.getAuthorities().stream()
+                        .flatMap(authority -> ApplicationUserRole.valueOf(authority.getAuthority()).getGrantedAuthorities().stream())
                         .collect(Collectors.toSet()),
                 entity.isAccountNonExpired(),
                 entity.isAccountNonLocked(),
